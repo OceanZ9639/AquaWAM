@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AquaWAM: A Dynamics-aware World Action Model for Underwater Embodied Agents</title>
+<meta name="description" content="AquaWAM is a dynamics-aware world action model for underwater embodied agents. It predicts the physical future of an underwater vehicle, then chooses the action. 72.6% success on 20 USIM tasks.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://oceanz9639.github.io/AquaWAM/">
+<meta property="og:title" content="AquaWAM: A Dynamics-aware World Action Model for Underwater Embodied Agents">
+<meta property="og:description" content="AquaWAM predicts the physical future of an underwater vehicle, then chooses the action. 72.6% success on 20 USIM tasks.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://oceanz9639.github.io/AquaWAM/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="ocean" id="ocean" aria-hidden="true"></div>
+<div class="rov" id="rov" aria-hidden="true"><img src="media/rov.png" alt=""></div>
+
+<div class="more">
+  <button class="more-btn" id="moreBtn" type="button" aria-expanded="false">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"/></svg>
+    More Works
+    <span class="caret">▾</span>
+  </button>
+  <div class="more-menu" id="moreMenu">
+    <p class="more-head">More from our group</p>
+    <a href="https://github.com/OceanZ9639/DY-LUT">
+      <b>DY-LUT</b>
+      <span>Depth-Aware YCbCr Lookup Tables for Real-Time Underwater Image Enhancement</span>
+      <em>GitHub →</em>
+    </a>
+    <a href="https://github.com/OceanZ9639/PIC-UIE">
+      <b>PIC-UIE</b>
+      <span>Predicting Image-Adaptive Corrections for Lightweight Underwater Image Enhancement</span>
+      <em>GitHub →</em>
+    </a>
+  </div>
+</div>
+<button class="to-top" id="toTop" type="button" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg>
+</button>
+
+<main id="top">
+  <section class="hero">
+    <video class="hero-video" autoplay muted loop playsinline poster="media/hero.jpg">
+      <source src="media/hero.mp4" type="video/mp4">
+    </video>
+    <div class="hero-shade"></div>
+    <div class="hero-copy">
+      <h1><span>AquaWAM: A Dynamics-aware World Action Model</span><span>for Underwater Embodied Agents</span></h1>
+      <p class="authors">Cunhao Zhu<sup>1</sup>, Yifeng Wang<sup>2</sup>, Dongliang Xu<sup>1</sup>, Yunzhong Hou<sup>2</sup>, Yue Yao<sup>1,*</sup>, Chi Harold Liu<sup>2</sup></p>
+      <p class="affils"><sup>1</sup> Shandong University<br><sup>2</sup> Beijing Institute of Technology</p>
+      <p class="star">* Corresponding author</p>
+      <div class="pills">
+        <span class="pill soon" aria-disabled="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h9l5 5v15a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm8 1.5V8h4.5"/></svg>Paper</span>
+        <!-- 有 arXiv 编号后把 span 换成 a，并加上 href -->
+        <span class="pill soon" aria-disabled="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l5 5v13H6V3zM14 3v6h6M8 13h8M8 17h5"/></svg>arXiv</span>
+        <a class="pill" href="https://github.com/OceanZ9639/AquaWAM"><svg class="fill" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.1-1.47-1.1-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0 1 12 6.8c.85 0 1.7.11 2.5.34 1.9-1.29 2.74-1.02 2.74-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.86v2.76c0 .26.18.58.69.48A10 10 0 0 0 12 2z"/></svg>Code</a>
+        <a class="pill" href="https://huggingface.co/datasets/Vincent2025hello/usim"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7l8-4 8 4-8 4-8-4zm0 5l8 4 8-4M4 17l8 4 8-4"/></svg>Dataset</a>
+        <a class="pill" href="https://github.com/VincentGu2000/u0env"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 0 1 13.7-5.6L20 8M20 4v4h-4M20 12a8 8 0 0 1-13.7 5.6L4 16M4 20v-4h4"/></svg>Env</a>
+        <span class="pill soon" aria-disabled="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3zM12 12l8-4.5M12 12v9M12 12L4 7.5"/></svg>Model</span>
+      </div>
+    </div>
+    <p class="hero-note">Wreck footage by Jun Ho Lee, Pexels. Not a USIM simulation.</p>
+  </section>
+
+  <section id="abstract" class="band c1">
+    <aside class="notice" aria-label="Open Source">
+      <p class="notice-title">Open Source</p>
+      <div class="notice-body"></div>
+    </aside>
+    <div class="wrap">
+      <h2>Abstract</h2>
+      <p>World Action Models (WAMs) are becoming increasingly important and useful for embodied intelligence, as they enable robots to anticipate the consequences of candidate actions before interacting with the physical environment. However, underwater robots are usually subject to <strong>passive dynamics</strong>, such as inertia, buoyancy, hydrodynamic drag, and persistent drift, which can continue to affect the vehicle even after an action is completed. Existing WAMs, which primarily predict action-conditioned visual observations, are not explicitly designed to capture such passive motion dynamics. In this paper, we present <strong>AquaWAM</strong>, <strong>the first World Action Model designed for underwater embodied agents</strong>. Instead of predicting future images, AquaWAM models both <strong>action-conditioned and passive physical dynamics</strong>, including the <strong>thruster dead band</strong>, the <strong>inertial glide</strong> that outlasts each command, and <strong>ambient currents</strong>.</p>
+      <p>Specifically, it senses through the <strong>DVL, IMU, pressure sensor and joint encoders</strong>, while cameras supply only semantics for understanding goals and target pose. By modeling <strong>compact navigation states</strong> rather than high-dimensional visual observations, AquaWAM substantially reduces the model size and computational cost compared with conventional WAMs. Experimentally, AquaWAM achieves a <strong>72.6% task success rate</strong> across <strong>20 underwater tasks</strong> on the <strong>USIM benchmark</strong>, outperforming existing methods while making action decisions <strong>2.7× faster than U0</strong> on an <strong>NVIDIA Jetson AGX Orin</strong>. Our model also remains effective when some onboard sensor measurements are unavailable. For example, without DVL velocity measurements, our method still achieves a <strong>61.6% success rate</strong>, compared with <strong>39.4%</strong> for U0.</p>
+    </div>
+  </section>
+
+  <section id="method" class="band c2">
+    <div class="wrap">
+      <h2>Method</h2>
+      <p>AquaWAM keeps the interface of the VLA baselines: the same two cameras, <strong>DVL, IMU, pressure sensor and joint encoders</strong> come in, and the same thruster and joint commands go out. What changes is how a command is chosen. A single <strong>physical-state predictor</strong> forecasts a <strong>19-dimensional vehicle state</strong>, or <strong>35 dimensions</strong> within reach of an object, <strong>two seconds ahead</strong>. A <strong>disturbance token</strong> computed from the last 1.6 s of history captures the ambient current and each thruster’s efficiency. Glide, dead band, buoyancy and drag are learned from <strong>demonstrations and task-agnostic play</strong>, not hand-coded.</p>
+      <p>There is <strong>no action head</strong>. Every half second AquaWAM rolls out <strong>128 candidate commands</strong>, scores the predicted futures, and executes only the <strong>first 0.5 s</strong> of the best. Within reach of an object, the candidates become <strong>short thrust pulses followed by a coast</strong>, each scored by where its glide ends, so every pulse crosses the dead band. Cameras only supply the <strong>goal and the target pose</strong>. When the DVL loses bottom lock, the <strong>same network estimates velocity</strong> from the masked history.</p>
+      <figure class="plate">
+        <img src="media/fig-method.png" alt="AquaWAM overview: perception, physical state, candidate futures, and the chosen command.">
+      </figure>
+    </div>
+  </section>
+
+  <section id="results" class="band c3">
+    <div class="wrap">
+      <h2>Results</h2>
+      <p>Table 1 of the paper. Succ. is the number of successful trials. SPL and ASD follow the USIM definitions. Green is best, pale green is second-best.</p>
+      <div class="table-wrap">
+        <table class="main">
+          <thead>
+            <tr>
+              <th rowspan="2">Model</th>
+              <th colspan="2">Navigation</th>
+              <th colspan="2">Grasping</th>
+              <th colspan="2">Transporting</th>
+              <th>Tracking</th>
+              <th>Overall</th>
+            </tr>
+            <tr>
+              <th>Succ. ↑</th><th>SPL ↑</th>
+              <th>Succ. ↑</th><th>ASD (s) ↓</th>
+              <th>Succ. ↑</th><th>SSR ↑</th>
+              <th>Succ. ↑</th>
+              <th>SR ↑</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>OpenVLA</td>
+              <td>50/160</td><td>0.71±0.19</td>
+              <td>0/480</td><td>—</td>
+              <td>0/40</td><td>0.0%</td>
+              <td>0/20</td>
+              <td>7.1% (50/700)</td>
+            </tr>
+            <tr>
+              <td>π0.5</td>
+              <td>58/160</td><td>0.59±0.19</td>
+              <td>1/480</td><td>87.3</td>
+              <td>0/40</td><td>0.0%</td>
+              <td>0/20</td>
+              <td>8.4% (59/700)</td>
+            </tr>
+            <tr>
+              <td>GR00T N1.5</td>
+              <td>122/160</td><td class="second">0.78±0.23</td>
+              <td>140/480</td><td>102.2</td>
+              <td>10/40</td><td>32.5%</td>
+              <td>4/20</td>
+              <td>39.4% (276/700)</td>
+            </tr>
+            <tr>
+              <td>X-VLA</td>
+              <td>85/160</td><td>0.64±0.24</td>
+              <td>4/480</td><td class="second">63.5</td>
+              <td>0/40</td><td>0.0%</td>
+              <td>1/20</td>
+              <td>12.9% (90/700)</td>
+            </tr>
+            <tr>
+              <td>SmolVLA</td>
+              <td>74/160</td><td>0.64±0.25</td>
+              <td>7/480</td><td>94.7</td>
+              <td>0/40</td><td>5.0%</td>
+              <td>1/20</td>
+              <td>11.7% (82/700)</td>
+            </tr>
+            <tr>
+              <td>U0</td>
+              <td class="second">140/160</td><td>0.75±0.24</td>
+              <td class="second">195/480</td><td>99.8</td>
+              <td class="second">13/40</td><td class="second">52.5%</td>
+              <td class="second">14/20</td>
+              <td class="second">51.7% (362/700)</td>
+            </tr>
+            <tr>
+              <td>AquaWAM</td>
+              <td class="best">151/160</td><td class="best">0.84±0.21</td>
+              <td class="best">314/480</td><td class="best">62.9</td>
+              <td class="best">23/40</td><td class="best">65.0%</td>
+              <td class="best">20/20</td>
+              <td class="best">72.6% (508/700)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>Main results</h3>
+      <p>With full sensing, AquaWAM succeeds in <strong>72.6% of 700 trials</strong>, against 51.7% for U0. Grasping rises from 40.6% to <strong>65.4%</strong>, transporting from 32.5% to <strong>57.5%</strong>, tracking from 70% to <strong>100%</strong>, and navigation from 87.5% to <strong>94.4%</strong>. Successful grasps take <strong>62.9 s</strong>, against 99.8 s for U0. Navigation SPL is <strong>0.84</strong>, the highest in the table.</p>
+      <figure class="plate">
+        <img src="media/fig-traces.png" alt="Execution traces for grasping, transport, navigation, and tracking.">
+        <figcaption>Execution traces. Grasping and transport use full sensing. Navigation and tracking lose the DVL where marked and finish on the estimate.</figcaption>
+      </figure>
+      <div class="pair">
+        <div>
+          <h3>Grasp experiments</h3>
+          <p>This experiment asks where the grasping margin comes from. U0 succeeds in 12 to 20 of 40 trials on each object. AquaWAM succeeds in <strong>20 to 34</strong>, and <strong>leads on every object</strong>. With the benchmark’s own object pose, so that perception plays no part, <strong>predicted pulses grasp in 85.2%</strong> of 480 trials and a <strong>hand-tuned positioning law in 17.9%</strong>. Only 24% of that law’s trials enter the closure window. AquaWAM reading the wrist camera, rather than the benchmark pose, grasps in <strong>65.4%</strong>.</p>
+        </div>
+        <div>
+          <h3>Computation</h3>
+          <p>On a <strong>Jetson AGX Orin</strong>, scoring 128 candidates two seconds ahead takes <strong>22 ms</strong>, and a pulse decision takes <strong>19 ms</strong>. With the perception heads included, a decision costs <strong>79.5 ms</strong> in navigation and <strong>95.7 ms</strong> in grasping, which is <strong>2.7× faster</strong> than U0’s 214 ms. The <strong>2.4 million and 2.6 million parameters</strong> are the predictor. Each DINOv2-base perception backbone adds 86 million, and that time is included in the AquaWAM bars.</p>
+        </div>
+        <figure class="plate match">
+          <img src="media/fig-grasp.png" alt="Successes out of 40 on each grasp task, for the hand-tuned law, U0, AquaWAM, and predicted pulses.">
+          <figcaption>Successes out of 40 on each grasp task. Outer ring: predicted pulses. Then AquaWAM, U0, and the hand-tuned law.</figcaption>
+        </figure>
+        <figure class="plate match">
+          <img src="media/fig-cost.png" alt="Parameter count and decision time on Jetson AGX Orin.">
+          <figcaption>Computation on Jetson AGX Orin 32 GB. Predictor parameters on the left, decision time on the right.</figcaption>
+        </figure>
+      </div>
+      <h3>When the DVL fails</h3>
+      <p>The DVL loses bottom lock partway through every trial and does not recover. U0 falls from 51.7% to 39.4%: navigation from 87.5% to 45.6%, tracking from 70% to 5%, grasping holds at 42.1%. <strong>AquaWAM keeps 61.6%</strong>: navigation <strong>93.8%</strong>, tracking <strong>80%</strong>, grasping <strong>54.6%</strong>. Transport after a 2.9 m carry is 7.5% against 0%. As a <strong>takeover layer for U0</strong>, the same estimator lifts U0 from 39.4% to <strong>49.7%</strong>.</p>
+      <figure class="plate">
+        <img src="media/fig-dvl.png" alt="Success by task family after DVL loss.">
+        <figcaption>Success by family after DVL loss. AquaWAM is marked on navigation, grasping, transport, and tracking.</figcaption>
+      </figure>
+      <h3>Extreme cases</h3>
+      <p>The main judges are already near the ceiling, so this experiment <strong>tightens the judges and perturbs the world</strong>. AquaWAM leads the 1.0 m waypoint judge, <strong>61 of 80</strong> against 53, and ties U0 at 0.5 m, 44 each. With the DVL lost it still leads the 0.5 m gotos, <strong>45 against 28</strong>, and the inspections, <strong>39 of 40 against 7</strong>. It also <strong>leads every perturbed world</strong>, including half thrust and turbid water. A thruster that delivers nothing, unseen in play, leaves 4 of 40 gotos against 1 for U0.</p>
+      <div class="table-wrap">
+        <table class="main hard">
+          <thead>
+            <tr>
+              <th>Perturbed world</th><th>U0</th><th>AquaWAM</th>
+              <th>Stricter judge</th><th>U0</th><th>AquaWAM</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Start heading rotated 90–180°</td><td>52/80</td><td>63/80</td><td>Goto, all waypoints within 1.0 m</td><td>53/80</td><td>61/80</td></tr>
+            <tr><td>Goto endpoint within 0.5 m, not 1 m</td><td>26/40</td><td>35/40</td><td>Goto, all waypoints within 0.5 m</td><td>44/80</td><td>44/80</td></tr>
+            <tr><td>Thruster 3 at 50%, seen in play</td><td>3/40</td><td>30/40</td><td>Goto, 0.5 m waypoints, DVL loss</td><td>28/80</td><td>45/80</td></tr>
+            <tr><td>Thruster 1 at 50%, unseen</td><td>4/40</td><td>21/40</td><td>Goto, all waypoints within 0.25 m</td><td>25/80</td><td>24/80</td></tr>
+            <tr><td>Thruster 1 at 0%, unseen</td><td>1/40</td><td>4/40</td><td>Inspect, 1 m ball, 90% coverage</td><td>36/40</td><td>39/40</td></tr>
+            <tr><td>Turbid water, Jerlov 0.50</td><td>1/20</td><td>9/20</td><td>Inspect, same judge, DVL loss</td><td>7/40</td><td>39/40</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="fine">USIM-Hard. Left: 20 trials per task in a perturbed world. Right: stricter judges re-score the main trials, and the DVL-loss rows re-score the dropout trials.</p>
+    </div>
+  </section>
+
+  <section id="scenarios" class="band c4">
+    <div class="wrap">
+      <h2>Underwater Scenarios</h2>
+      <p>Pick a scene below. Cards marked <span class="tag t7">7 models</span> play all seven policies on the same task and episode index; each panel freezes when its run ends, at 2× until the last success and 16× after (scan uses 8×). Cards marked <span class="tag t1">AquaWAM</span> show AquaWAM alone at 2×, on episodes not recorded for the other models.</p>
+      <div class="cards" role="tablist">
+        <button class="tab on" data-src="media/cmp-blue-shallow.mp4" data-ratio="16 / 9" data-max="960" data-title="Pick the blue block, shallow water" data-note="AquaWAM closes at 19 s. U0, GR00T N1.5, π0.5, X-VLA, SmolVLA and OpenVLA all reach the 180 s timeout without a grasp."><img src="media/thumb-blue-shallow.jpg" alt=""><b>Blue block, shallow</b><span class="tag t7">7 models</span></button>
+        <button class="tab" data-src="media/cmp-pipe.mp4" data-ratio="16 / 9" data-max="960" data-title="Pick a pipe, shallow water" data-note="AquaWAM finishes in 17 s. The other six models time out."><img src="media/thumb-pipe.jpg" alt=""><b>Pipe, shallow</b><span class="tag t7">7 models</span></button>
+        <button class="tab" data-src="media/cmp-blue-factory.mp4" data-ratio="16 / 9" data-max="960" data-title="Pick the blue block, factory" data-note="AquaWAM at 20 s. U0 also grasps, at 57 s. The other five time out."><img src="media/thumb-blue-factory.jpg" alt=""><b>Blue block, factory</b><span class="tag t7">7 models</span></button>
+        <button class="tab" data-src="media/cmp-inspect.mp4" data-ratio="16 / 9" data-max="960" data-title="Inspect the pool pipeline" data-note="AquaWAM completes the route in 53 s, π0.5 in 95 s, U0 in 122 s. GR00T N1.5, X-VLA, SmolVLA and OpenVLA time out."><img src="media/thumb-inspect.jpg" alt=""><b>Inspect, pool</b><span class="tag t7">7 models</span></button>
+        <button class="tab" data-src="media/cmp-scan.mp4" data-ratio="16 / 9" data-max="960" data-title="Scan a modern wreck" data-note="GR00T N1.5 finishes in 61 s, AquaWAM in 63 s, U0 in 67 s, X-VLA in 173 s. π0.5, SmolVLA and OpenVLA time out."><img src="media/thumb-scan.jpg" alt=""><b>Scan, modern wreck</b><span class="tag t7">7 models</span></button>
+        <button class="tab" data-src="media/solo-tower.mp4" data-ratio="4 / 3" data-max="720" data-title="Goto the water tower" data-note="AquaWAM arrives in 38 s. No other model was recorded on this episode."><img src="media/thumb-tower.jpg" alt=""><b>Water tower</b><span class="tag t1">AquaWAM</span></button>
+        <button class="tab" data-src="media/solo-charge.mp4" data-ratio="4 / 3" data-max="720" data-title="Goto the charge station" data-note="AquaWAM arrives in 16 s. No other model was recorded on this episode."><img src="media/thumb-charge.jpg" alt=""><b>Charge station</b><span class="tag t1">AquaWAM</span></button>
+        <button class="tab" data-src="media/solo-sea.mp4" data-ratio="4 / 3" data-max="720" data-title="Inspect the sea pipeline" data-note="AquaWAM completes the route in 98 s. No other model was recorded on this episode."><img src="media/thumb-sea.jpg" alt=""><b>Inspect, sea</b><span class="tag t1">AquaWAM</span></button>
+        <button class="tab" data-src="media/solo-ancient.mp4" data-ratio="4 / 3" data-max="720" data-title="Scan an ancient wreck" data-note="AquaWAM finishes the scan in 72 s. No other model was recorded on this episode."><img src="media/thumb-ancient.jpg" alt=""><b>Scan, ancient wreck</b><span class="tag t1">AquaWAM</span></button>
+        <button class="tab" data-src="media/solo-boat.mp4" data-ratio="4 / 3" data-max="720" data-title="Follow the boat" data-note="AquaWAM finishes in 52 s. No other model was recorded on this episode."><img src="media/thumb-boat.jpg" alt=""><b>Follow the boat</b><span class="tag t1">AquaWAM</span></button>
+        <button class="tab" data-src="media/solo-red.mp4" data-ratio="4 / 3" data-max="720" data-title="Pick the red block, shallow water" data-note="AquaWAM grasps in 15 s. No other model was recorded on this episode."><img src="media/thumb-red.jpg" alt=""><b>Red block, shallow</b><span class="tag t1">AquaWAM</span></button>
+        <button class="tab" data-src="media/solo-pipe-factory.mp4" data-ratio="4 / 3" data-max="720" data-title="Pick a pipe, factory" data-note="AquaWAM grasps in 14 s. No other model was recorded on this episode."><img src="media/thumb-pipe-factory.jpg" alt=""><b>Pipe, factory</b><span class="tag t1">AquaWAM</span></button>
+      </div>
+      <figure class="screen">
+        <video id="stage" controls playsinline preload="metadata" src="media/cmp-blue-shallow.mp4"></video>
+        <figcaption>
+          <strong id="stage-title">Pick the blue block, shallow water</strong>
+          <span id="stage-note">AquaWAM closes at 19 s. U0, GR00T N1.5, π0.5, X-VLA, SmolVLA and OpenVLA all reach the 180 s timeout without a grasp.</span>
+        </figcaption>
+      </figure>
+      <p class="fine">Selected episodes, not the benchmark average. Success rates are in Tables 1 and 6. A shared episode index is not claimed to be an identical rendered first frame.</p>
+    </div>
+  </section>
+
+  <section id="thanks" class="band c6">
+    <div class="wrap">
+      <h2>Acknowledgement</h2>
+      <p>AquaWAM is evaluated on the USIM benchmark and compared with U0. We thank Junwen Gu, Zhiheng Wu, and coauthors for <a href="https://arxiv.org/abs/2510.07869">USIM and U0</a> and the <a href="https://huggingface.co/datasets/Vincent2025hello/usim">U0 dataset</a>.</p>
+    </div>
+  </section>
+
+  <section id="paper" class="band c1">
+    <div class="wrap">
+      <h2>BibTeX</h2>
+      <p>Code, play data and trained models will be released with the paper.</p>
+      <div class="bib-wrap">
+        <pre id="bib">@misc{zhu2026aquawam,
+  title  = {AquaWAM: A Dynamics-aware World Action Model for Underwater Embodied Agents},
+  author = {Zhu, Cunhao and Wang, Yifeng and Xu, Dongliang and Hou, Yunzhong and Yao, Yue and Liu, Chi Harold},
+  year   = {2026}
+}</pre>
+        <button id="copy" type="button">Copy BibTeX</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script src="main.js"></script>
+</body>
+</html>
