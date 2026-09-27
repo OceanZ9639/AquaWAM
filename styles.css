@@ -6,7 +6,7 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; zoom: 0.75; }
 body {
   margin: 0;
   background: linear-gradient(180deg, #eaf6fb 0%, #dcf0f8 45%, #cfe8f3 100%) fixed;
@@ -169,7 +169,7 @@ main { position: relative; z-index: 1; }
 .to-top svg { width: 26px; height: 26px; }
 .to-top svg path { fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
 
-.hero { position: relative; min-height: 100vh; display: grid; align-items: center; color: #fff; background: #071016; }
+.hero { position: relative; min-height: calc(100vh / 0.75); display: grid; align-items: center; color: #fff; background: #071016; }
 .hero-video, .hero-shade { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .hero-shade { background: rgba(7, 16, 22, 0.55); }
 .hero-copy { position: relative; width: min(1800px, calc(100% - 48px)); margin: 0 auto; text-align: center; }
