@@ -228,14 +228,6 @@ a.pill[href]:hover { background: var(--blue); }
   text-align: center;
 }
 .notice-body { flex: 1; min-height: 0; }
-.band .notice-line {
-  margin: 4px 0 0;
-  color: #0f172a;
-  font-size: 20px;
-  font-weight: 600;
-  line-height: 1.45;
-  text-align: left;
-}
 .hero-note {
   position: absolute;
   left: 22px;
