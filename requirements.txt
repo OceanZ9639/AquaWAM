@@ -1,0 +1,11 @@
+numpy
+pandas
+pyarrow
+tqdm
+pyyaml
+scipy
+scikit-learn
+einops
+opencv-python-headless
+huggingface_hub
+av

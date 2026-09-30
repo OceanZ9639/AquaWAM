@@ -1,0 +1,12 @@
+{
+ "n": 300,
+ "J_online_mpc_128x2": 0.8482299556334814,
+ "J_teacher_512x3": 0.7701889804005623,
+ "J_direct_head": 0.7224880724772811,
+ "frac_head_le_online": 0.9333333333333333,
+ "ratio_head_over_online_p50": 0.8777682301780141,
+ "ms_mpc": 24.855026472359896,
+ "ms_head": 9.621059040849406,
+ "core": "/hy-tmp/models/uwam/best_scenes.pt",
+ "head": "/hy-tmp/models/uwam/direct_head.pt"
+}

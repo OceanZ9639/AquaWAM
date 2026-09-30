@@ -1,0 +1,25 @@
+[project]
+name = "underwater-wam"
+version = "0.1.0"
+description = "Disturbance-aware multimodal action-conditioned underwater world model (USIM / Stonefish reproduction)"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "numpy",
+  "pandas",
+  "pyarrow",
+  "torch",
+  "tqdm",
+  "pyyaml",
+  "scipy",
+  "scikit-learn",
+  "einops",
+  "opencv-python-headless",
+  "huggingface_hub",
+]
+
+[project.optional-dependencies]
+vis = ["lpips", "av", "matplotlib", "imageio"]
+
+[tool.setuptools.packages.find]
+include = ["uwam*"]

@@ -1,0 +1,12 @@
+{
+ "delta_ee_m": [
+  0.0001,
+  0.0003,
+  -0.0003
+ ],
+ "n_rows": 162,
+ "n_episodes": 2,
+ "rms_before_cm": 0.12640981123513106,
+ "rms_after_cm": 0.12333098202065053,
+ "note": "off_judge = off_ours + R_ee_world @ delta_ee; apply as ee_body += R_ee_body @ delta_ee"
+}

@@ -1,0 +1,26 @@
+{
+ "best_scenes": {
+  "dead thruster 1 (held-out eval flights)": {
+   "dvl_pred_mae_ms": 0.0178360678255558,
+   "eta_hat_thruster1": 0.9873031973838806,
+   "n_windows": 828
+  },
+  "healthy vehicle (tight-tolerance goto flights)": {
+   "dvl_pred_mae_ms": 0.012631203047931194,
+   "eta_hat_thruster1": 0.9789328575134277,
+   "n_windows": 713
+  }
+ },
+ "adapt_eta0": {
+  "dead thruster 1 (held-out eval flights)": {
+   "dvl_pred_mae_ms": 0.018447615206241608,
+   "eta_hat_thruster1": 0.3901100754737854,
+   "n_windows": 828
+  },
+  "healthy vehicle (tight-tolerance goto flights)": {
+   "dvl_pred_mae_ms": 0.015857359394431114,
+   "eta_hat_thruster1": 0.5546265244483948,
+   "n_windows": 713
+  }
+ }
+}
