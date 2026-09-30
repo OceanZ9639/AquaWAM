@@ -2,6 +2,8 @@
 
 **Project page:** https://cunhaozhu.github.io/AquaWAM/
 
+**Paper:** https://arxiv.org/abs/2609.33299
+
 
 AquaWAM is the first World Action Model designed for underwater embodied agents. Underwater vehicles keep moving after a command ends, because of inertia, buoyancy, drag, and currents. Existing world action models mostly predict future images, so they do not capture this passive motion.
 
